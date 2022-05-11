@@ -6,7 +6,7 @@ export default function Card({ publication }: any) {
       <div className="card-image">
         <figure className="image is-4by3">
           <img
-            src="https://bulma.io/images/placeholders/1280x960.png"
+            src="https://picsum.photos/seed/picsum/200/300?random=1"
             alt="Placeholder image"
           />
         </figure>
@@ -16,21 +16,19 @@ export default function Card({ publication }: any) {
           <div className="media-left">
             <figure className="image is-48x48">
               <img
-                src="https://bulma.io/images/placeholders/96x96.png"
+                src="https://picsum.photos/200/300?random=2"
                 alt="Placeholder image"
               />
             </figure>
           </div>
           <div className="media-content">
             <p className="title is-4">{publication.name}</p>
-            <p className="subtitle is-6">@johnsmith</p>
+            <p className="subtitle is-6">Status: {publication.status}</p>
           </div>
         </div>
 
         <div className="content">
-          {}
-          <br />
-          <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <time dateTime="2016-1-1">Created On: {publication.created_on}</time>
         </div>
       </div>
     </div>
