@@ -1,13 +1,17 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-/* eslint-disable jsx-a11y/img-redundant-alt */
-export default function Card({ publication }: any) {
+import { Publication } from "./api";
+
+type CardProps = {
+  publication: Publication;
+};
+
+export default function Card({ publication }: CardProps) {
   return (
-    <div className="card" style={{ width: "300px" }}>
+    <div className="card" style={{ width: "320px" }}>
       <div className="card-image">
         <figure className="image is-4by3">
           <img
-            src="https://picsum.photos/seed/picsum/200/300?random=1"
-            alt="Placeholder image"
+            src={`https://picsum.photos/320/240?random=${publication.id}`}
+            alt="Publication"
           />
         </figure>
       </div>
@@ -15,10 +19,7 @@ export default function Card({ publication }: any) {
         <div className="media">
           <div className="media-left">
             <figure className="image is-48x48">
-              <img
-                src="https://picsum.photos/200/300?random=2"
-                alt="Placeholder image"
-              />
+              <img src={`https://picsum.photos/200/200?random=${publication.id}`} alt="Author" />
             </figure>
           </div>
           <div className="media-content">
@@ -28,7 +29,7 @@ export default function Card({ publication }: any) {
         </div>
 
         <div className="content">
-          <time dateTime="2016-1-1">Created On: {publication.created_on}</time>
+          <time dateTime={publication.created_on}>Created On: {publication.created_on}</time>
         </div>
       </div>
     </div>
