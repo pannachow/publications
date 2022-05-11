@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable jsx-a11y/img-redundant-alt */
-export default function Card() {
+export default function Card({ publication }: any) {
   return (
     <div className="card" style={{ width: "300px" }}>
       <div className="card-image">
@@ -22,14 +22,13 @@ export default function Card() {
             </figure>
           </div>
           <div className="media-content">
-            <p className="title is-4">John Smith</p>
+            <p className="title is-4">{publication.name}</p>
             <p className="subtitle is-6">@johnsmith</p>
           </div>
         </div>
 
         <div className="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-          iaculis mauris.
+          {}
           <br />
           <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
