@@ -1,14 +1,29 @@
-import Navbar from "./Navbar";
-import Card from "./Card";
-import Footer from "./Footer";
 import "bulma/css/bulma.min.css";
 import { useEffect, useState } from "react";
-import Pagination from "./Pagination";
-import { getPublications, login, LoginInfo, Publications } from "./api";
+import {
+  getPublications,
+  login,
+  LoginInfo,
+  Publication,
+  Publications,
+  PublicationStatus,
+} from "./api";
+import Card from "./components/Card";
+import Filter from "./components/Filter";
+import Footer from "./components/Footer";
+import Modal from "./components/Modal";
+import Navbar from "./components/Navbar";
+import Pagination from "./components/Pagination";
+import Search from "./components/Search";
 
-function App() {
+export default function App() {
   const [loginInfo, setLoginInfo] = useState<LoginInfo>();
+
   const [publications, setPublications] = useState<Publications>();
+  const [statusFilter, setStatusFilter] = useState<PublicationStatus>();
+  const [nameSearch, setNameSearch] = useState<string>("");
+
+  const [selectedPublication, setSelectedPublication] = useState<Publication>();
 
   useEffect(() => {
     login().then(setLoginInfo).catch(console.error);
@@ -16,11 +31,18 @@ function App() {
 
   useEffect(() => {
     if (!loginInfo) return;
-    loadPublicationsPage(loginInfo, 1);
-  }, [loginInfo]);
+    loadPublicationsPage(loginInfo, 1, nameSearch, statusFilter);
+  }, [loginInfo, statusFilter, nameSearch]);
 
-  function loadPublicationsPage(loginInfo: LoginInfo, page: number): void {
-    getPublications(loginInfo, page).then(setPublications).catch(console.error);
+  function loadPublicationsPage(
+    loginInfo: LoginInfo,
+    page: number,
+    nameSearch: string,
+    statusFilter?: PublicationStatus
+  ): void {
+    getPublications(loginInfo, page, nameSearch, statusFilter)
+      .then(setPublications)
+      .catch(console.error);
   }
 
   function PublicationsPagination() {
@@ -29,7 +51,9 @@ function App() {
         count={publications.count}
         page={publications.page}
         total={publications.total}
-        onClick={(page) => loadPublicationsPage(loginInfo, page)}
+        onClick={(page) =>
+          loadPublicationsPage(loginInfo, page, nameSearch, statusFilter)
+        }
       />
     ) : (
       <></>
@@ -37,18 +61,35 @@ function App() {
   }
 
   return (
-    <div>
+    <div
+      className="is-flex is-flex-direction-column"
+      style={{ minHeight: "100vh" }}
+    >
       <Navbar />
-      <div style={{ backgroundColor: "#081E36" }}>
+      <div className="is-flex-grow-1" style={{ backgroundColor: "#081E36" }}>
         <div className="container py-5">
-          <PublicationsPagination />
           <div
-            className="is-flex is-flex-wrap-wrap"
+            className="is-flex is-flex-wrap-wrap is-justify-content-space-between is-align-content-center"
             style={{ gap: "20px" }}
           >
+            <PublicationsPagination />
+            <Search onChange={(value) => setNameSearch(value)} />
+            <Filter
+              onChange={(status) =>
+                status === "all"
+                  ? setStatusFilter(undefined)
+                  : setStatusFilter(status)
+              }
+            />
+          </div>
+          <div className="is-flex is-flex-wrap-wrap" style={{ gap: "20px" }}>
             {publications &&
               publications._embedded.edition.map((publication) => (
-                <Card key={publication.identifier} publication={publication} />
+                <Card
+                  key={publication.identifier}
+                  publication={publication}
+                  onClick={() => setSelectedPublication(publication)}
+                />
               ))}
           </div>
           &nbsp;
@@ -56,8 +97,12 @@ function App() {
         </div>
       </div>
       <Footer />
+      {selectedPublication && (
+        <Modal
+          publication={selectedPublication}
+          onClose={() => setSelectedPublication(undefined)}
+        />
+      )}
     </div>
   );
 }
-
-export default App;

@@ -11,7 +11,6 @@ export default function Footer() {
         <div className="content has-text-centered">
           <div className="mb-1">
             <a href="https://github.com/pannachow">
-              <i className="fa-brands fa-github-square"></i>
               <FontAwesomeIcon icon={faCoffee} />
             </a>
           </div>

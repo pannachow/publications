@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 export default function Navbar() {
   return (
-    <nav className="navbar" style={{ backgroundColor: "rgb(4,19,33)" }}>
+    <nav className="navbar is-dark" style={{ backgroundColor: "rgb(4,19,33)" }}>
       <div className="container">
         <div className="navbar-brand">
           <a className="navbar-item" href="#">
@@ -18,12 +18,12 @@ export default function Navbar() {
         </div>
         <div id="navbarMenu" className="navbar-menu">
           <div className="navbar-end">
-            <a className="navbar-item is-active">Home</a>
-            <a className="navbar-item">Examples</a>
-            <a className="navbar-item">Features</a>
-            <a className="navbar-item">Team</a>
-            <a className="navbar-item">Archives</a>
-            <a className="navbar-item">Help</a>
+            <a href="#" className="navbar-item has-text-light">Home</a>
+            <a href="#" className="navbar-item has-text-light">Examples</a>
+            <a href="#" className="navbar-item has-text-light">Features</a>
+            <a href="#" className="navbar-item has-text-light">Team</a>
+            <a href="#" className="navbar-item has-text-light">Archives</a>
+            <a href="#" className="navbar-item has-text-light">Help</a>
           </div>
         </div>
       </div>

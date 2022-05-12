@@ -1,12 +1,13 @@
-import { Publication } from "./api";
+import { Publication } from "../api";
 
 type CardProps = {
+  onClick: () => void;
   publication: Publication;
 };
 
-export default function Card({ publication }: CardProps) {
+export default function Card({ onClick, publication }: CardProps) {
   return (
-    <div className="card" style={{ width: "320px" }}>
+    <div className="card is-clickable" style={{ width: "320px" }} onClick={onClick}>
       <div className="card-image">
         <figure className="image is-4by3">
           <img
@@ -29,7 +30,7 @@ export default function Card({ publication }: CardProps) {
         </div>
 
         <div className="content">
-          <time dateTime={publication.created_on}>Created On: {publication.created_on}</time>
+          <time dateTime={publication.modified_on}>Last Modified: {publication.modified_on}</time>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function Pagination({
         {pages > 5 && page > 2 && (
           <li>
             <a
-              className="pagination-link"
+              className="pagination-link has-text-light"
               aria-label="Goto page 1"
               onClick={() => onClick(1)}
             >
@@ -37,7 +37,7 @@ export default function Pagination({
         {page > 1 && (
           <li>
             <a
-              className="pagination-link"
+              className="pagination-link has-text-light"
               aria-label={`Goto page ${page - 1}`}
               onClick={() => onClick(page - 1)}
             >
@@ -58,7 +58,7 @@ export default function Pagination({
         {page < pages && (
           <li>
             <a
-              className="pagination-link"
+              className="pagination-link has-text-light"
               aria-label={`Goto page ${page + 1}`}
               onClick={() => onClick(page + 1)}
             >
@@ -74,7 +74,7 @@ export default function Pagination({
         {pages > 5 && page < pages - 1 && (
           <li>
             <a
-              className="pagination-link"
+              className="pagination-link has-text-light"
               aria-label={`Goto page ${pages}`}
               onClick={() => onClick(pages)}
             >

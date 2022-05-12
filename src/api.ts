@@ -1,3 +1,5 @@
+import qs from "qs";
+
 export type LoginInfo = {
   token_type: string;
   access_token: string;
@@ -33,15 +35,44 @@ export type Publication = {
   id: number;
   name: string;
   identifier: string;
-  status: string;
+  status: PublicationStatus;
+  category: string;
+  level: string;
   created_on: string;
+  modified_on: string;
+  options: object;
 };
+
+export type PublicationStatus = "draft" | "published" | "offline";
 
 export async function getPublications(
   loginInfo: LoginInfo,
-  page: number
+  page: number,
+  nameSearch: string,
+  statusFilter?: PublicationStatus
 ): Promise<Publications> {
-  const url = `https://api.foleon.com/v2/magazine/edition?page=${page}&limit=20`;
+  const params = {
+    page,
+    limit: 20,
+    query: [] as { field: string; type: string; value: string }[],
+  };
+  if (nameSearch) {
+    params.query.push({
+      field: "name",
+      type: "like",
+      value: `%${nameSearch.toLowerCase()}%`
+    })
+  }
+  if (statusFilter) {
+    params.query.push({
+      field: "status",
+      type: "eq",
+      value: statusFilter,
+    });
+  }
+  const url = `https://api.foleon.com/v2/magazine/edition?${qs.stringify(
+    params
+  )}`;
   const response = await fetch(url, {
     method: "GET",
     headers: {
