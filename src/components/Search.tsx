@@ -10,7 +10,7 @@ export default function Search({ onChange }: SearchProps) {
     <div className="control has-icons-left has-icons-right">
       <input
         className="input is-medium"
-        type="email"
+        type="text"
         placeholder="Search"
         onChange={(e) => onChange(e.target.value)}
       />
