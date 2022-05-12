@@ -1,4 +1,5 @@
 import "bulma/css/bulma.min.css";
+import "./App.css";
 import { useEffect, useState } from "react";
 import {
   getPublications,
@@ -69,7 +70,7 @@ export default function App() {
       <div className="is-flex-grow-1" style={{ backgroundColor: "#081E36" }}>
         <div className="container py-5">
           <div
-            className="is-flex is-flex-wrap-wrap is-justify-content-space-between is-align-content-center"
+            className="is-flex is-flex-wrap-wrap is-justify-content-space-between is-align-content-center is-mobile-flex-direction-column is-mobile-align-items-center"
             style={{ gap: "20px" }}
           >
             <PublicationsPagination />
@@ -82,7 +83,10 @@ export default function App() {
               }
             />
           </div>
-          <div className="is-flex is-flex-wrap-wrap" style={{ gap: "20px" }}>
+          <div
+            className="is-flex is-flex-wrap-wrap is-mobile-flex-direction-column is-mobile-align-items-center"
+            style={{ gap: "20px" }}
+          >
             {publications &&
               publications._embedded.edition.map((publication) => (
                 <Card

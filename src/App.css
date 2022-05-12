@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+  .select {
+    margin-bottom: 20px;
+  }
+  .pagination {
+    margin-bottom: 0px !important;
+  }
+  .is-mobile-flex-direction-column {
+    flex-direction: column;
+  }
+  .is-mobile-align-items-center {
+    align-items: center;
+  }
+}
