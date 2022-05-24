@@ -14,8 +14,8 @@ export default function Footer() {
               <FontAwesomeIcon icon={faCoffee} />
             </a>
           </div>
-          <p className="is-size-6">
-            <strong>Project</strong> by
+          <p className="is-size-6 has-text-light">
+            Project by
             <a href="https://github.com/pannachow"> Panna Chow</a>
           </p>
         </div>
